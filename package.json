@@ -1,0 +1,44 @@
+{
+  "name": "lto-webserver",
+  "version": "1.0.0",
+  "description": "LTO Webserver",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legalthings/lto-webserver.git"
+  },
+  "keywords": [
+    "lto",
+    "webserver"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/legalthings/lto-webserver/issues"
+  },
+  "homepage": "https://github.com/legalthings/lto-webserver#readme",
+  "dependencies": {
+    "cache-manager": "^2.8.0",
+    "config": "^1.30.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "helmet": "^3.11.0",
+    "http-proxy": "^1.16.2",
+    "morgan": "^1.9.0",
+    "mustache-express": "^1.2.5",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
+    "nock": "^9.2.3",
+    "supertest": "^3.0.0"
+  }
+}
