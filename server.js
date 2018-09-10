@@ -1,10 +1,9 @@
 'use strict';
 const app = require('./lib/app');
+const config = require('config');
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-  console.log(`Started server on port: ${port}`);
+app.listen(config.port, () => {
+  console.log(`Started server on port: ${config.port}`);
 });
 
 module.exports = app;
