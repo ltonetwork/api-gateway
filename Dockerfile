@@ -10,8 +10,10 @@ COPY package*.json ./
 
 RUN npm install --only=production
 
+RUN npm i pm2 -g
+
 # Bundle app source
 COPY . .
 
 EXPOSE 80
-CMD [ "node", "server.js" ]
+CMD [ "pm2-runtime", "server.js" ]
