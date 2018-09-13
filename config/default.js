@@ -19,8 +19,8 @@ module.exports = {
       domain: 'legaldocx'
     },
     {
-      id: 'dispatcher',
-      domain: 'event-dispatcher'
+      id: 'queuer',
+      domain: 'event-queuer'
     }
   ],
   ssl: false
