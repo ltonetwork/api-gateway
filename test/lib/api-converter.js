@@ -27,7 +27,7 @@ describe('APIConverter', () => {
 
   describe('#getAllUrls', () => {
     it('should return all urls', () => {
-      expect(apiConverter.getAllUrls()).to.deep.eq(['http://legalflow', 'http://legalevents', 'http://event-queuer']);
+      expect(apiConverter.getAllUrls()).to.deep.eq({flow: 'http://legalflow', events: 'http://legalevents', queuer: 'http://event-queuer'});
     });
   })
 });
