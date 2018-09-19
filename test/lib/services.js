@@ -31,17 +31,17 @@ describe('Services', () => {
 
 
       const info = await services.getAllServicesInfo('');
-      expect(info).to.deep.eq([
-        {
+      expect(info).to.deep.eq({
+        flow: {
           id: 'flow'
         },
-        {
+        events: {
           id: 'events'
         },
-        {
+        queuer: {
           id: 'queuer'
         }
-      ]);
+      });
     });
   })
 });
