@@ -1,5 +1,5 @@
 module.exports = {
-  noAuth: ['/flow', '/events', '/dispatcher'],
+  noAuth: ['/flow', '/events', '/queuer'],
   aliases: [],
   default_api: process.env.DEFAULT_API || 'http://{api}',
   primary_domain: process.env.PRIMARY_DOMAIN || 'localhost',
@@ -13,10 +13,6 @@ module.exports = {
     {
       id: 'events',
       domain: 'legalevents'
-    },
-    {
-      id: 'docx',
-      domain: 'legaldocx'
     },
     {
       id: 'queuer',
