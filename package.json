@@ -1,48 +1,71 @@
 {
-  "name": "lto-webserver",
-  "version": "1.0.0",
+  "name": "lto-new-webserver",
+  "version": "0.1.0",
   "description": "LTO Webserver",
-  "main": "server.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "author": "Sven Stam",
+  "license": "MIT",
   "scripts": {
-    "test": "NODE_ENV=test mocha --recursive --ui bdd test",
-    "start": "node server.js"
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:dev": "nodemon",
+    "build": "rm -rf dist && tsc && npm run postbuild",
+    "postbuild": "cp -r src/config/data dist/config",
+    "prestart:prod": "rm -rf dist && tsc && npm run postbuild",
+    "start:prod": "node dist/main.js",
+    "start:hmr": "node dist/server",
+    "test": "jest",
+    "test:cov": "jest --detectOpenHandles --forceExit --coverage",
+    "test:e2e": "jest --detectOpenHandles --forceExit --runInBand --config ./test/jest-e2e.json",
+    "test:all": "npm run test:e2e && npm run test:cov",
+    "webpack": "webpack --config webpack.config.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/legalthings/lto-webserver.git"
-  },
-  "keywords": [
-    "lto",
-    "webserver"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/legalthings/lto-webserver/issues"
-  },
-  "homepage": "https://github.com/legalthings/lto-webserver#readme",
   "dependencies": {
+    "@nestjs/common": "^5.1.0",
+    "@nestjs/core": "^5.1.0",
     "bluebird": "^3.5.2",
-    "cache-manager": "^2.8.0",
-    "config": "^1.30.0",
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
-    "helmet": "^3.11.0",
-    "http-proxy": "^1.16.2",
-    "lto-api": "^0.4.4",
-    "morgan": "^1.9.0",
-    "mustache-express": "^1.2.5",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.2",
-    "winston": "^2.4.0"
+    "convict": "^4.4.0",
+    "http-proxy": "^1.17.0",
+    "lto-api": "^0.5.4",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^6.2.2",
+    "typescript": "^3.0.1",
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.3.3"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^3.5.3",
-    "nock": "^9.2.3",
-    "supertest": "^3.0.0"
+    "@nestjs/testing": "^5.1.0",
+    "@types/bluebird": "^3.5.24",
+    "@types/express": "^4.16.0",
+    "@types/http-proxy": "^1.16.2",
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.7.1",
+    "@types/supertest": "^2.0.5",
+    "jest": "^23.5.0",
+    "node-mocks-http": "^1.7.0",
+    "nodemon": "^1.18.3",
+    "prettier": "^1.14.2",
+    "supertest": "^3.1.0",
+    "ts-jest": "^23.1.3",
+    "ts-loader": "^4.4.2",
+    "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.5.0",
+    "tslint": "5.11.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

@@ -1,0 +1,82 @@
+{
+  "env": {
+    "doc": "The application environment.",
+    "format": [
+      "production",
+      "development",
+      "test"
+    ],
+    "default": "development",
+    "env": "NODE_ENV"
+  },
+  "webserver": {
+    "doc": "The config of this application, with a namespace so it can be merged into larger configs",
+    "logger": {
+      "console": {
+        "level": {
+          "default": "info",
+          "env": "WEBSERVER_LOGGER_CONSOLE_LEVEL"
+        }
+      },
+      "combined": {
+        "level": {
+          "default": "info",
+          "env": "WEBSERVER_LOGGER_COMBINED_LEVEL"
+        }
+      }
+    },
+    "port": {
+      "default": 80,
+      "env": "WEBSERVER_PORT"
+    },
+    "noauth": {
+      "format": "Array",
+      "default": [
+        "/flow",
+        "/events",
+        "/queuer"
+      ]
+    },
+    "default_api": {
+      "default": "http://{api}",
+      "env": "DEFAULT_API"
+    },
+    "primary_domain": {
+      "default": "localhost",
+      "env": "PRIMARY_DOMAIN"
+    },
+    "services": {
+      "doc": "Available services within the webserver",
+      "format": "Array",
+      "default": [
+        {
+          "id": "flow",
+          "domain": "legalflow"
+        },
+        {
+          "id": "events",
+          "domain": "legalevents"
+        },
+        {
+          "id": "queuer",
+          "domain": "event-queuer"
+        }
+      ]
+    }
+  },
+  "lto": {
+    "doc": "Global config of the LTO node",
+    "api": {
+      "key": {
+        "default": "",
+        "env": "LTO_API_KEY"
+      }
+    }
+  },
+  "log": {
+    "level": {
+      "default": "",
+      "env": "LOG_LEVEL"
+    }
+  }
+}
