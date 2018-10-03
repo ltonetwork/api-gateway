@@ -39,11 +39,11 @@
     },
     "default_api": {
       "default": "http://{api}",
-      "env": "DEFAULT_API"
+      "env": "WEBSERVER_DEFAULT_API"
     },
     "primary_domain": {
       "default": "localhost",
-      "env": "PRIMARY_DOMAIN"
+      "env": "WEBSERVER_PRIMARY_DOMAIN"
     },
     "services": {
       "doc": "Available services within the webserver",

@@ -33,7 +33,7 @@ describe('AppService', () => {
 
       const expected = {
         description: 'LTO Webserver',
-        name: 'lto-new-webserver',
+        name: 'lto-webserver',
         services,
       };
       jest

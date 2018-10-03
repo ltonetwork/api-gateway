@@ -32,7 +32,7 @@ describe('AppController (e2e)', () => {
 
     const expected = {
       description: 'LTO Webserver',
-      name: 'lto-new-webserver',
+      name: 'lto-webserver',
       services,
     };
     jest.spyOn(appService, 'getAllServicesInfo').mockImplementation(() => services);
