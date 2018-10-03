@@ -8,12 +8,18 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install --only=production
-
-RUN npm i pm2 -g
+RUN npm i
 
 # Bundle app source
 COPY . .
 
+RUN npm run build
+
+RUN rm -rf node_modules/
+
+RUN npm i --only=production
+
+RUN npm i pm2 -g
+
 EXPOSE 80
-CMD [ "pm2-runtime", "server.js" ]
+CMD ["pm2-runtime", "dist/main.js"]
