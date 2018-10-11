@@ -2,11 +2,13 @@
   "env": {
     "doc": "The application environment.",
     "format": [
+      "",
+      "lto",
       "production",
       "development",
       "test"
     ],
-    "default": "development",
+    "default": "",
     "env": "NODE_ENV"
   },
   "webserver": {
