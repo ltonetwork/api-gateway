@@ -1,4 +1,4 @@
-LTO Webserver
+LTO Network - API Gateway
 =============
 
 The LTO webserver handles authentication and forwards requests to the corresponding services
