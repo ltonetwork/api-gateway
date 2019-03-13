@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '../config/config.module';
 import { LoggerModule } from '../logger/logger.module';
 import { ProxyService } from './proxy.service';
@@ -10,7 +10,9 @@ export const ProxyModuleConfig = {
     ConfigModule,
     LoggerModule,
   ],
-  controllers: [ProxyController],
+  controllers: [
+    ProxyController,
+  ],
   providers: [
     ...proxyProviders,
     ProxyService,
@@ -22,4 +24,4 @@ export const ProxyModuleConfig = {
 };
 
 @Module(ProxyModuleConfig)
-export class ProxyModule { }
+export class ProxyModule {}

@@ -30,7 +30,7 @@ describe('AuthService', () => {
 
   describe('shouldAuthenticateRoute', () => {
     it('should return true if a service requires no authentication', () => {
-      expect(authService.shouldAuthenticateRoute('/flow')).toBeFalsy();
+      expect(authService.shouldAuthenticateRoute('/')).toBeFalsy();
     });
 
     it('should return false if a service does require authentication', () => {

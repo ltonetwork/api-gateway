@@ -37,7 +37,7 @@ describe('ProxyService', () => {
     it('proxy a request to service', async () => {
       const req = httpMocks.createRequest({
         method: 'GET',
-        url: '/flow/processes/1',
+        url: '/processes/1',
         app: {
           get: () => 'test',
         },
@@ -45,7 +45,9 @@ describe('ProxyService', () => {
       const res = httpMocks.createResponse();
       const next = jest.fn();
 
-      await proxyService.proxy(req, res);
+      const processed = await proxyService.proxy(req, res);
+
+      expect(processed).toBeTruthy();
 
       expect(req.url).toBe('/processes/1');
       const spyWeb = jest.spyOn(proxyService.proxyServer, 'web');
@@ -63,10 +65,9 @@ describe('ProxyService', () => {
         },
       });
       const res = httpMocks.createResponse();
-      const next = jest.fn();
 
-      await proxyService.proxy(req, res);
-      expect(res.statusCode).toBe(404);
+      const processed = await proxyService.proxy(req, res);
+      expect(processed).toBeFalsy();
     });
   });
 

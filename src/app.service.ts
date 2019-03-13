@@ -1,8 +1,8 @@
 import { HttpService, Injectable } from '@nestjs/common';
 import { ProxyService } from './proxy/proxy.service';
 import Bluebird from 'bluebird';
-import util from "util";
-import fs from "fs";
+import util from 'util';
+import fs from 'fs';
 
 @Injectable()
 export class AppService {

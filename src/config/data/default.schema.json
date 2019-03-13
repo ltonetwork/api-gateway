@@ -34,9 +34,7 @@
     "noauth": {
       "format": "Array",
       "default": [
-        "/flow",
-        "/events",
-        "/queuer"
+        "/"
       ]
     },
     "default_api": {
@@ -64,6 +62,17 @@
           "domain": "event-queuer"
         }
       ]
+    },
+    "endpoints": {
+      "doc": "Endpoints that are mapped to services",
+      "default": {
+        "scenarios": "flow",
+        "processes": "flow",
+        "responses": "flow",
+        "identities": "flow",
+        "queue": "event-chain",
+        "event-chain": "event-chain"
+      }
     }
   },
   "lto": {

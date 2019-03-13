@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigLoaderService } from './config-loader.service';
-import ProxyServer from 'http-proxy';
 
 @Injectable()
 export class ConfigService {
@@ -20,6 +19,10 @@ export class ConfigService {
 
   getServices(): Array<any> {
     return this.config.get('webserver.services');
+  }
+
+  getEndPoints(): any {
+    return this.config.get('webserver.endpoints');
   }
 
   getNoAuthRoutes(): Array<any> {
