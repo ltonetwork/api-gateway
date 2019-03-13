@@ -10,7 +10,7 @@ export class ConfigService {
   }
 
   getPort(): number {
-    return this.config.get('webserver.port');
+    return this.config.get('port');
   }
 
   getDefaultApi(): string {

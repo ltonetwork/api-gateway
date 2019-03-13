@@ -27,10 +27,6 @@
         }
       }
     },
-    "port": {
-      "default": 80,
-      "env": "WEBSERVER_PORT"
-    },
     "noauth": {
       "format": "Array",
       "default": [
@@ -89,5 +85,9 @@
       "default": "",
       "env": "LOG_LEVEL"
     }
+  },
+  "port": {
+    "default": 80,
+    "env": "PORT"
   }
 }

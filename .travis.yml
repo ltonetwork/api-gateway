@@ -25,3 +25,18 @@ after_success:
 # Bump version
 - npm install mversion -g
 - test "$TRAVIS_BRANCH" != 'master' -o "$TRAVIS_PULL_REQUEST" != "false" || test -n "$(git tag --contains)" || bin/bump-version
+
+before_deploy:
+# Set environment variables for deploy
+- export NEW_VERSION=$(git tag --contains)
+- git archive -v -o api-gateway.zip --format=zip HEAD
+
+deploy:
+# Staging
+- provider: releases
+  api-key:
+    secure: "YHpVCOeEvtMSkJ5JOMwTBjuZnV/U96sMlbYV5EVJKHzbJog+zS6z0JU7Q+VWkgWTMZx4/PviH+cmrRGjcqtgPqxM3MsSnBvVI+qfd4DAoQGRf5B0z+pdC90mv85LOIAl0j/9cZ1UsrzHlkIxty+MNxm85IyeQsj2oJYTUxuAdF47TbKk2CBbClUE3d6+4OLpno3PHa3FNA/cCDTMEdJ7b+Obk5J8P39Mlr2jY79Sdy9nG88GH5t/BvxdmN03HlzIvC9d3tHXTMjOs+74MhKnekxJjKH2E9sN4Gd9Tdt+VLqtz91LQQbvRME7DYTEvIWa9CiAArNMqT9BjGNAzZZ6cPWf82R+2lJ8/LLO4E7cBzb/1wySafPhE6Zw8TRDjZdDZJKFkET0Y0QDLmDxrMD9T+Vj4ug9D5TUZNQs9ycRgT3KybigyAtsjkcc24ikesFrvy2D7lIIrIJIyNO6Agyeb4zp/Y+ISEf/GgUlRbfJ2fbaQEDsoqaKKHZbF7EZQSnLskSQBBAj0feoMv3QAfN6JDk/p60U5MZHgd68WXHV/D7w9wrL6UHvhfB6CPKkaeTSxfooDPBtlZaKfxckz/Y/Ipr6f7ThW6AvikecI52TkmU+yx++sRykwRHlZ3IGyGjQmKr/qE2GG8RF4F94aiHfA+TKt0rkGW8ge5DhYaG/e2M="
+  release-number: "$NEW_VERSION"
+  file: api-gateway.zip
+  on:
+    branch: master
