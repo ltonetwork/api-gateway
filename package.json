@@ -24,6 +24,7 @@
     "@nestjs/core": "^5.1.0",
     "bluebird": "^3.5.2",
     "convict": "^4.4.0",
+    "event-stream": "^3.3.4",
     "http-proxy": "^1.17.0",
     "lto-api": "^0.5.4",
     "reflect-metadata": "^0.1.12",
