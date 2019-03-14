@@ -49,8 +49,8 @@ describe('ConfigService', () => {
         'processes': 'flow',
         'responses': 'flow',
         'identities': 'flow',
-        'queue': 'event-chain',
-        'event-chain': 'event-chain',
+        'queue': 'events',
+        'event-chains': 'events',
       });
     });
 

@@ -47,6 +47,7 @@ export class ProxyService {
   async proxy(req: Request, res: Response): Promise<boolean> {
     const orgUrl = req.originalUrl.replace(/\/$/, '');
     const endpoint = orgUrl.replace(/^\/([^\/]+)(\/.*)?$/, '$1');
+    req.url = orgUrl;
 
     if (!this.endpoints.hasOwnProperty(endpoint)) {
       return false;

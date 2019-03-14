@@ -52,8 +52,8 @@ describe('ProxyService', () => {
       expect(req.url).toBe('/processes/1');
       const spyWeb = jest.spyOn(proxyService.proxyServer, 'web');
       expect(spyWeb.mock.calls.length).toBe(1);
+      expect(spyWeb.mock.calls[0][0].url).toBe('/processes/1');
       expect(spyWeb.mock.calls[0][2].target).toBe('http://legalflow');
-      expect(next.mock.calls.length).toBe(0);
     });
 
     it('proxy should not proxy a request if the api doesn\'t exist', async () => {
