@@ -26,15 +26,28 @@ describe('ProxyController', () => {
     it('should proxy a request to right service', async () => {
       const result = {id: 'foo'};
       jest.spyOn(proxyService, 'proxy').mockImplementation((req: Request, proxyRes: Response) => {
-        proxyRes.status(200).json({ id: 'foo'});
+        proxyRes.status(200).json(result);
+        return true;
       });
 
       const res = await request(app.getHttpServer())
-        .get('/api/flow/processes/1')
+        .get('/processes/1')
         .send();
 
       expect(res.status).toBe(200);
-      expect(res.body).toEqual({ id: 'foo'});
+      expect(res.body).toEqual(result);
+    });
+
+    it('should not proxy if the endpoint is not mapped', async () => {
+      jest.spyOn(proxyService, 'proxy').mockImplementation((req: Request, proxyRes: Response) =>
+        Promise.resolve(false),
+      );
+
+      const res = await request(app.getHttpServer())
+        .get('/test/1')
+        .send();
+
+      expect(res.status).toBe(404);
     });
   });
 });

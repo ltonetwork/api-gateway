@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import ProxyServer from 'http-proxy';
 type ProxyServerType = typeof ProxyServer;
 import { LoggerService } from '../logger/logger.service';
@@ -10,6 +10,7 @@ import { PROXYSERVER } from '../constants';
 export class ProxyService {
   private defaultApi: string;
   private apis: any;
+  private endpoints: any;
   public proxyServer: ProxyServer;
 
   constructor(
@@ -28,8 +29,10 @@ export class ProxyService {
       this.apis[service.id] = this.defaultApi.replace('{api}', service.domain);
     }
 
+    this.endpoints = this.config.getEndPoints();
+
     this.proxyServer = this._ProxyServer.createProxyServer({
-      xfwd: true
+      xfwd: true,
     });
     this.proxyServer.on('proxyReq', (proxyReq, req: Request, res: Response, options: any) => {
       proxyReq.setHeader('Host', options.target.host);
@@ -41,21 +44,21 @@ export class ProxyService {
     this.proxyServer.close();
   }
 
-  async proxy(req: Request, res: Response): Promise<void> {
-    const orgUrl = req.url.replace(/\/$/, '');
-    const api = orgUrl.replace(/^\/([^\/]+)(\/.*)?$/, '$1');
-    req.url = req.url.replace(/^\/[^\/]+/, '') || '/'; // eslint-disable-line no-param-reassign
+  async proxy(req: Request, res: Response): Promise<boolean> {
+    const orgUrl = req.originalUrl.replace(/\/$/, '');
+    const endpoint = orgUrl.replace(/^\/([^\/]+)(\/.*)?$/, '$1');
+    req.url = orgUrl;
 
-    if (!this.exists(api)) {
-      this.logger.warn(`API: ${api} not found`);
-      res.status(404).send('API Not Found!');
-      return;
+    if (!this.endpoints.hasOwnProperty(endpoint)) {
+      return false;
     }
+
+    const api = this.getEndpointService(endpoint);
 
     const url = this.getUrl(api, req.app.get('environment'));
     if (!url) {
       res.status(500).send('Invalid service configuration');
-      return;
+      return true;
     }
 
     this.logger.debug(`Forward to url: ${url}`);
@@ -65,8 +68,10 @@ export class ProxyService {
     }, (e) => {
       this.logger.warn(`Failed to connect to API  ${url} : ${e}`);
       res.status(500).send(`Failed to connect to API  ${url} : ${e}`);
-      return;
+      return true;
     });
+
+    return true;
   }
 
   /**
@@ -96,6 +101,13 @@ export class ProxyService {
       urls[api] = this.apis[api].replace('{env}', env);
     }
     return urls;
+  }
+
+  getEndpointService(endpoint): string | null {
+    if (!this.endpoints.hasOwnProperty(endpoint)) {
+      return null;
+    }
+    return this.endpoints[endpoint];
   }
 
   protected getApis(): any {}

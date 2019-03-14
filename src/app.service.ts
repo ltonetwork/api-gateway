@@ -1,8 +1,8 @@
 import { HttpService, Injectable } from '@nestjs/common';
 import { ProxyService } from './proxy/proxy.service';
 import Bluebird from 'bluebird';
-import util from "util";
-import fs from "fs";
+import util from 'util';
+import fs from 'fs';
 
 @Injectable()
 export class AppService {
@@ -28,15 +28,14 @@ export class AppService {
   async getAllServicesInfo(env): Promise<any> {
     const apis = this.proxyService.getAllUrls(env);
 
-    const promises = {};
-    Object.keys(apis).map((key: string) => {
-      promises[key] = this.httpService.get(apis[key]).toPromise();
-    });
-
-    const services = await Bluebird.props(promises);
-    Object.keys(services).map((key: string) => {
-      services[key] = services[key].data;
-    });
+    const services = {};
+    for (const key of Object.keys(apis)) {
+      try {
+        services[key] = (await this.httpService.get(apis[key]).toPromise()).data;
+      } catch (e) {
+        services[key] = { error: 'Not running'};
+      }
+    }
 
     return services;
   }

@@ -43,11 +43,20 @@ describe('ConfigService', () => {
       ]);
     });
 
+    test('getEndpoints', () => {
+      expect(configService.getEndPoints()).toEqual({
+        'scenarios': 'flow',
+        'processes': 'flow',
+        'responses': 'flow',
+        'identities': 'flow',
+        'queue': 'events',
+        'event-chains': 'events',
+      });
+    });
+
     test('getNoAuthRoutes', () => {
       expect(configService.getNoAuthRoutes()).toEqual([
-        '/flow',
-        '/events',
-        '/queuer',
+        '/',
       ]);
     });
 
