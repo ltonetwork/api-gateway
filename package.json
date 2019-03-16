@@ -1,7 +1,7 @@
 {
-  "name": "lto-webserver",
+  "name": "lto-api-gateway",
   "version": "0.1.0",
-  "description": "LTO Webserver",
+  "description": "LTO Network - API Gateway",
   "author": "Sven Stam",
   "license": "MIT",
   "scripts": {
