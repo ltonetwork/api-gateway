@@ -31,8 +31,8 @@ describe('AppController (e2e)', () => {
     };
 
     const expected = {
-      description: 'LTO Webserver',
-      name: 'lto-webserver',
+      description: 'LTO Network - API Gateway',
+      name: 'lto-api-gateway',
       services,
     };
     jest.spyOn(appService, 'getAllServicesInfo').mockImplementation(() => services);
