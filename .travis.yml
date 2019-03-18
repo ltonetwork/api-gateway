@@ -12,6 +12,10 @@ branches:
 
 before_install:
 # Configure Git
+- openssl aes-256-cbc -K $encrypted_d5ef11d23d78_key -iv $encrypted_d5ef11d23d78_iv -in github_deploy_key.enc -out github_deploy_key -d
+- chmod 600 github_deploy_key
+- eval $(ssh-agent -s)
+- ssh-add github_deploy_key
 - git config --global user.email "travis-ci@legalthings.net"
 - git config --global user.name "Travis CI"
 
@@ -25,18 +29,3 @@ after_success:
 # Bump version
 - npm install mversion -g
 - test "$TRAVIS_BRANCH" != 'master' -o "$TRAVIS_PULL_REQUEST" != "false" || test -n "$(git tag --contains)" || bin/bump-version
-
-before_deploy:
-# Set environment variables for deploy
-- export NEW_VERSION=$(git tag --contains)
-- git archive -v -o api-gateway.zip --format=zip HEAD
-
-deploy:
-  provider: releases
-  api-key:
-    secure: "AI+VFVCd7FFOnTMk1NAtQUUdRFiPIujmV0cd7tUQOxsD06j+rfcrSNa1/Xb2+YbO3YqJZPXYt0mqCyQTGTqm0hYNmjyuuokz6U1Tvd/HhjUlPOD8f2AIacCxYeJ4Umvutv53m4sNJQZxVTzRf0iijNKOMuUbh7/tb2fwgrCMYqXKQ/s5AoA5KQWSo5elFMeu1kqNmjlFTJgWArJrkEcr7rhl0UHgrODsMb7iAELdQyeKnuqjE2KR1pJG58IjtG+tI3vuFp0OP9S0ztt3XqiXmD2nfKFG2+4Zr1umtuAR8KUeA/Fcb1j5oDqjWUyevQkJSH3VDU7JKccGK3ixW6DtcrayYH/OV0STBudbPagBb+Jg/KOddljZX7dsfM/suzE6TsuoYCzSf69xMZe5E4sC7MZrO2jVjVmgxUKv1SyePgiCzkeEh2zyYgNU/awE/Vs6cA9dEnv9bcos3/exnWF+969w7c6UMRd4TyP1OzDmXnBjXuXCsaILzWfLxzKXKKmR9iE7AlVj1G5hzl9/X8j+LvgILKhrpgqbNIC46vM+3QyNc4TkbcYeGPAENgPbWBdiLc+asfJ4OKSM/VvK3xC/qjF0IffBQUQ6cxEPVeN4AKZPkmCKOvweOdQ5P7JqnCMrcvlPcPMxyY16Sh8DosmgBi6prEhEXq8LcaWx8UeYmOs="
-  release-number: "$NEW_VERSION"
-  file: "api-gateway.zip"
-  skip_cleanup: true
-  on:
-    branch: master
