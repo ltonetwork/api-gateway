@@ -11,14 +11,11 @@ RUN npm i
 # Bundle app source
 COPY . .
 
-RUN npm i mversion -g
-
 RUN npm run build
 
 RUN rm -rf node_modules/
 
 RUN npm i --only=production
-RUN bin/set-version
 
 FROM node:dubnium-alpine
 # Move the build files from build folder to app folder
