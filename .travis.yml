@@ -21,7 +21,7 @@ before_install:
 - printf "%s\n" \
   "Host github.com" \
   "  IdentityFile github_deploy_key" >> ~/.ssh/config
-
+- git remote add github git@github.com:legalthings/api-gateway.git
 
 # Get all tags of git repo
 - git fetch origin 'refs/tags/*:refs/tags/*'
