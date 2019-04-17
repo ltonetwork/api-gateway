@@ -52,4 +52,16 @@ export class ConfigService {
 
     return this.config.get('webserver.logger.combined');
   }
+
+  getCors(): any {
+    const credentials = this.config.get('cors.credentials') || false;
+    const exposedHeaders = this.config.get('cors.exposed_headers') || [];
+    const allowedHeaders = this.config.get('cors.allowed_headers') || [];
+
+    return {
+      credentials,
+      exposedHeaders,
+      allowedHeaders,
+    };
+  }
 }
