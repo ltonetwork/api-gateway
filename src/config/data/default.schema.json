@@ -89,5 +89,20 @@
   "port": {
     "default": 80,
     "env": "PORT"
+  },
+  "cors": {
+    "doc": "Cors configuration",
+    "credentials": {
+      "default": false,
+      "env": "CORS_CREDENTIALS"
+    },
+    "exposed_headers": {
+      "default": ["x-total"],
+      "env": "CORS_EXPOSED_HEADERS"
+    },
+    "allowed_headers": {
+      "default": ["Authorization", "x-date"],
+      "env": "CORS_ALLOWED_HEADERS"
+    }
   }
 }

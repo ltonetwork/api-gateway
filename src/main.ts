@@ -8,14 +8,16 @@ import helmet from 'helmet';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     bodyParser: false,
+    cors: true,
   });
   const logger = await app.get<LoggerService>(LoggerService);
   const config = await app.get<ConfigService>(ConfigService);
 
-  app.use(cors());
+  await app.init();
+
+  app.use(cors(await config.getCors()));
   app.use(helmet());
 
-  await app.init();
   await app.listen(config.getPort());
   logger.info(`Service running on port ${config.getPort()}`);
 }
