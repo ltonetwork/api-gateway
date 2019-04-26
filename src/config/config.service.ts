@@ -64,4 +64,8 @@ export class ConfigService {
       allowedHeaders,
     };
   }
+
+  isSSLEnabled(): boolean {
+    return this.config.get('ssl.enabled');
+  }
 }

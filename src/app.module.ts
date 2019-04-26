@@ -7,6 +7,8 @@ import { ProxyModule } from './proxy/proxy.module';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { ProxyController } from './proxy/proxy.controller';
 import { AuthModule } from './auth/auth.module';
+import { SSLModule } from './ssl/ssl.module';
+import { SSLMiddleware } from './ssl/ssl.middleware';
 
 export const AppConfigModule = {
   imports: [
@@ -15,6 +17,7 @@ export const AppConfigModule = {
     LoggerModule,
     ConfigModule,
     AuthModule,
+    SSLModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -23,6 +26,6 @@ export const AppConfigModule = {
 @Module(AppConfigModule)
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes(ProxyController);
+    consumer.apply(AuthMiddleware, SSLMiddleware).forRoutes(ProxyController);
   }
 }

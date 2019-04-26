@@ -35,7 +35,7 @@ describe('AppController (e2e)', () => {
       name: 'lto-api-gateway',
       services,
     };
-    jest.spyOn(appService, 'getAllServicesInfo').mockImplementation(() => services);
+    jest.spyOn(appService, 'getAllServicesInfo').mockImplementation(() => Promise.resolve(services));
     const res = await request(app.getHttpServer()).get('/');
     expect(res.status).toBe(200);
     expect(res.body).toMatchObject(expected);

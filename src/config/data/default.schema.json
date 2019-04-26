@@ -104,5 +104,11 @@
       "default": ["Authorization", "x-date"],
       "env": "CORS_ALLOWED_HEADERS"
     }
+  },
+  "ssl": {
+    "enabled": {
+      "default": false,
+      "env": "SSL_ENABLED"
+    }
   }
 }

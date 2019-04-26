@@ -38,7 +38,8 @@ describe('AppService', () => {
       };
       jest
         .spyOn(appService, 'getAllServicesInfo')
-        .mockImplementation(() => services);
+        .mockImplementation(() => Promise.resolve(services));
+
       expect(await appService.info()).toMatchObject(expected);
     });
   });
@@ -55,18 +56,18 @@ describe('AppService', () => {
       jest
         .spyOn(httpService, 'get')
         .mockImplementationOnce(() => ({
-          toPromise: () => ({ data: { name: 'foo' } }),
-        }));
+          toPromise: () => Promise.resolve({ data: { name: 'foo' } }),
+        }) as any);
       jest
         .spyOn(httpService, 'get')
         .mockImplementationOnce(() => ({
-          toPromise: () => ({ data: { name: 'bar' } }),
-        }));
+          toPromise: () => Promise.resolve({ data: { name: 'bar' } }),
+        }) as any);
       jest
         .spyOn(httpService, 'get')
         .mockImplementationOnce(() => ({
-          toPromise: () => ({ data: { name: 'test' } }),
-        }));
+          toPromise: () => Promise.resolve({ data: { name: 'test' } }),
+        }) as any);
 
       expect(await appService.getAllServicesInfo('env')).toMatchObject({
         foo: {
