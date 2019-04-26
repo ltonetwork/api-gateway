@@ -20,11 +20,11 @@ describe('AppController', () => {
   });
 
   describe('info', () => {
-    it('should return the service info', () => {
+    it('should return the service info', async () => {
       const appController = app.get<AppController>(AppController);
       const result = { name: 'foo' };
-      jest.spyOn(appService, 'info').mockImplementation(() => result);
-      expect(appController.info()).toEqual({ name: 'foo' });
+      jest.spyOn(appService, 'info').mockImplementation(() => Promise.resolve(result));
+      expect(await appController.info()).toEqual({ name: 'foo' });
     });
   });
 });

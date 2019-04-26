@@ -1,5 +1,18 @@
 {
   "webserver": {
-    "port": 3000
+    "services": [
+      {
+        "id": "flow",
+        "domain": "localhost:4001"
+      },
+      {
+        "id": "events",
+        "domain": "localhost:4002"
+      },
+      {
+        "id": "queuer",
+        "domain": "event-queuer"
+      }
+    ]
   }
 }

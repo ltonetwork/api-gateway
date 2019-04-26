@@ -27,7 +27,7 @@ describe('ProxyController', () => {
       const result = {id: 'foo'};
       jest.spyOn(proxyService, 'proxy').mockImplementation((req: Request, proxyRes: Response) => {
         proxyRes.status(200).json(result);
-        return true;
+        return Promise.resolve(true);
       });
 
       const res = await request(app.getHttpServer())

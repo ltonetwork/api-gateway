@@ -36,7 +36,7 @@ describe('AuthMiddleware', () => {
         });
         const res = httpMocks.createResponse();
         const next = jest.fn();
-        authMiddleware.authenticate(req, res, next);
+        authMiddleware.use(req, res, next);
         expect(next.mock.calls.length).toBe(1);
       });
 
@@ -53,7 +53,7 @@ describe('AuthMiddleware', () => {
         });
         const res = httpMocks.createResponse();
         const next = jest.fn();
-        authMiddleware.authenticate(req, res, next);
+        authMiddleware.use(req, res, next);
         expect(next.mock.calls.length).toBe(1);
       });
 
@@ -70,7 +70,7 @@ describe('AuthMiddleware', () => {
         });
         const res = httpMocks.createResponse();
         const next = jest.fn();
-        expect(() => authMiddleware.authenticate(req, res, next)).toThrow(
+        expect(() => authMiddleware.use(req, res, next)).toThrow(
           HttpException,
         );
       });

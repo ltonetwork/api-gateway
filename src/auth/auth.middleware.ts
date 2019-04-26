@@ -1,12 +1,12 @@
 import {
   Injectable,
   NestMiddleware,
-  MiddlewareFunction,
   HttpException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ConfigService } from '../config/config.service';
 import { LoggerService } from '../logger/logger.service';
+import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -16,11 +16,7 @@ export class AuthMiddleware implements NestMiddleware {
     private readonly authService: AuthService,
   ) {}
 
-  resolve(...args: any[]): MiddlewareFunction {
-    return this.authenticate.bind(this);
-  }
-
-  authenticate(req, res, next) {
+  use(req: Request, res: Response, next: NextFunction) {
     const orgUrl = req.url.replace(/\/$/, '');
 
     const api = orgUrl.replace(/^\/([^\/]+)(\/.*)?$/, '$1');
