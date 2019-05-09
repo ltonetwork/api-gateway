@@ -30,7 +30,9 @@
     "noauth": {
       "format": "Array",
       "default": [
-        "/"
+        "/",
+        "/viewer/",
+        "/playground/"
       ]
     },
     "default_api": {

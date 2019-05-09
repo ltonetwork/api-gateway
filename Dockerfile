@@ -22,7 +22,8 @@ FROM node:dubnium-alpine
 WORKDIR /usr/app
 COPY --from=build /usr/src/dist ./
 COPY --from=build /usr/src/node_modules ./node_modules/
-COPY --from=build /usr/src/package.json ./
+COPY --from=build /usr/src/package.json .
+COPY public /usr/public/
 
 RUN npm install -g pm2
 
