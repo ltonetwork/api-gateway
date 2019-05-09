@@ -57,6 +57,8 @@ describe('ConfigService', () => {
     test('getNoAuthRoutes', () => {
       expect(configService.getNoAuthRoutes()).toEqual([
         '/',
+        '/viewer/',
+        '/playground/',
       ]);
     });
 
