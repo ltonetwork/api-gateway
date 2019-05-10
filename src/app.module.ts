@@ -9,6 +9,7 @@ import { ProxyController } from './proxy/proxy.controller';
 import { AuthModule } from './auth/auth.module';
 import { SSLModule } from './ssl/ssl.module';
 import { SSLMiddleware } from './ssl/ssl.middleware';
+import { ToolsModule } from './tools/tools.module';
 
 export const AppConfigModule = {
   imports: [
@@ -18,6 +19,7 @@ export const AppConfigModule = {
     ConfigModule,
     AuthModule,
     SSLModule,
+    ToolsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
