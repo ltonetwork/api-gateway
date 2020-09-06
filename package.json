@@ -29,7 +29,7 @@
     "event-stream": "^4.0.1",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
-    "http-proxy": "^1.17.0",
+    "http-proxy": "^1.18.1",
     "lto-api": "^0.5.11",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.1",
