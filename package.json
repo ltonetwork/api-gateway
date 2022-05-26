@@ -24,7 +24,7 @@
     "@nestjs/core": "^6.1.1",
     "@nestjs/platform-express": "^6.1.1",
     "bluebird": "^3.5.4",
-    "convict": "^4.4.1",
+    "convict": "^6.2.3",
     "cors": "^2.8.5",
     "event-stream": "^4.0.1",
     "express": "^4.16.4",
